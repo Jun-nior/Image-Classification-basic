@@ -17,26 +17,30 @@ class_names=['plane','car','bird','cat','deef','dog','frog','horse','ship','truc
 
 # plt.show();
 
-training_images=training_images[:20000]
-training_labels=training_labels[:20000]
-testing_images=testing_images[:4000]
-testing_labels=testing_labels[:4000]
+training_images=training_images[:1000]
+training_labels=training_labels[:1000]
+testing_images=testing_images[:100]
+testing_labels=testing_labels[:100]
 
 # model=models.Sequential()
 # model.add(layers.Conv2D(32,(3,3),activation='relu',input_shape=(32,32,3)))
 # model.add(layers.MaxPooling2D((2,2)))
-# model.add(layers.Conv2D(64,(3,3)),activation='relu')
+# model.add(layers.Conv2D(64,(3,3),activation='relu'))
 # model.add(layers.MaxPooling2D((2,2)))
-# model.add(layers.Conv2D(64,(3,3)),activation='relu')
+# model.add(layers.Conv2D(64,(3,3),activation='relu'))
 # model.add(layers.Flatten())
 # model.add(layers.Dense(64,activation='relu'))
 # model.add(layers.Dense(10,activation='softmax'))
 
 # model.compile(optimizer='adam',loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-# model.fit(training_images,training_labels,epochs=10,validation_data=(testing_images,testing_labels))
+# model.fit(training_images,training_labels,epochs=1000,validation_data=(testing_images,testing_labels))
 
+# loss,accuracy=model.evaluate(testing_images,testing_labels)
+# print(f"loss: {loss}")
+# print(f"Accuracy: {accuracy}")
 
+# model.save('image_classifier.model')
 model=models.load_model('image_classifier.model')
 
 img = cv.imread('C:\Trung Main\TEST\Safeimagekit-resized-img.png')
@@ -48,5 +52,5 @@ prediction= model.predict(np.array([img])/255)
 index=np.argmax(prediction)
 print(f'Prediction is {class_names[index]}')
 plt.show()
-np.set_printoptions(precision=3, suppress=True)
+# np.set_printoptions(precision=7, suppress=True)
 print(prediction) # highest probability will be the final prediction
